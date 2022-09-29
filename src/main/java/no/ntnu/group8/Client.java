@@ -7,10 +7,12 @@ import java.util.Arrays;
 
 public class Client {
     private final DatagramSocket clientSocket;
-    private final String address = "129.241.152.12";
-    private final int port = 1234;
+    private String address;
+    private int port;
 
-    public Client() throws SocketException {
+    public Client(String address, int port) throws SocketException {
+        this.address = address;
+        this.port = port;
         clientSocket = new DatagramSocket();
     }
 
