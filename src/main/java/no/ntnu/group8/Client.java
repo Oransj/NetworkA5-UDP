@@ -32,7 +32,6 @@ public class Client {
         byte[] receiveMessageByte = new byte[1024];
         packet = new DatagramPacket(receiveMessageByte, receiveMessageByte.length);
         clientSocket.receive(packet);
-        clientSocket.close();
 
         return new String(packet.getData(), 0, packet.getLength());
     }
