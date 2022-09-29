@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class Client {
     private final DatagramSocket clientSocket;
-    private String address;
-    private int port;
+    private final String address;
+    private final int port;
 
     public Client(String address, int port) throws SocketException {
         this.address = address;
