@@ -26,27 +26,15 @@ public class Client {
 
     public String sendMessage(String message) throws IOException {
         byte[] messageByte = message.getBytes(StandardCharsets.UTF_8);
-        int i = 0;
-        StringBuilder stringBuilder = new StringBuilder();
-        boolean running = true;
-        while (running && i < 10) {
-            DatagramPacket packet = new DatagramPacket(messageByte, messageByte.length, InetAddress.getByName(address), port);
-            System.err.println("DatagramPacket successfully created");
-            clientSocket.send(packet);
-            System.err.println("Packet successfully sent");
-            packet = new DatagramPacket(messageByte, messageByte.length);
-            clientSocket.receive(packet);
-            System.err.println("Packet successfully received");
-            System.err.println("Packet data: " + Arrays.toString(packet.getData()));
-            String returnValue = new String(packet.getData(), 0, packet.getLength());
-            if (returnValue.equals("end")) {
-               running = false;
-            } else {
-                stringBuilder.append(returnValue);
-                i++;
-            }
-        }
-        return stringBuilder.toString();
+        clientSocket.connect(InetAddress.getByName(address), port);
+        DatagramPacket packet = new DatagramPacket(messageByte, messageByte.length, InetAddress.getByName(address), port);
+        clientSocket.send(packet);
+        byte[] receiveMessageByte = new byte[1024];
+        packet = new DatagramPacket(receiveMessageByte, receiveMessageByte.length);
+        clientSocket.receive(packet);
+        clientSocket.close();
+
+        return new String(packet.getData(), 0, packet.getLength());
     }
     
     /**

@@ -9,7 +9,7 @@ public class ClientRunner {
             Client client = new Client("129.241.152.12", 1234);
             String receivedString = client.sendMessage("task");
             int i = 0;
-            while (!receivedString.equals("end") && i < 1){
+            while (!receivedString.equals("end") && i < 3) {
                 System.out.println(receivedString);
                 String sendString = client.checkSOrQ(receivedString) + " " + client.wordCount(receivedString);
                 System.out.println("Sendstring: " + sendString);
