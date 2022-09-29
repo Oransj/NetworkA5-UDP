@@ -60,8 +60,10 @@ public class Client {
      * @return Number of words as an Int
      */
     public int wordCount(String text) {
+        StringBuilder sb = new StringBuilder(text);
+        sb.deleteCharAt(text.length() - 1);
         int count = 0;
-        String[] splited = text.split("\\s+");
+        String[] splited = sb.toString().split("\\s+");
         for (int i = 0; i < splited.length; i++) {
             if (splited[i].matches("[a-zA-Z]+")) {
                 count++;
