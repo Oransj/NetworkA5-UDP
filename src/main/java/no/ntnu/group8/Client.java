@@ -59,7 +59,7 @@ public class Client {
      * @param text The text to check
      * @return Number of words as an Int
      */
-    public static int wordCount(String text) {
+    public int wordCount(String text) {
         int count = 0;
         String[] splited = text.split("\\s+");
         for (int i = 0; i < splited.length; i++) {
