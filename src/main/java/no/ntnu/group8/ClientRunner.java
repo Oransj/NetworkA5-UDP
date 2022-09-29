@@ -7,13 +7,13 @@ public class ClientRunner {
     public ClientRunner() {
         try {
             Client client = new Client("129.241.152.12", 1234);
-            String receivedString = client.sendMessage("task");
             int i = 0;
             while (i < 3) {
+                String receivedString = client.sendMessage("task");
                 System.out.println(receivedString);
                 String sendString = client.checkSOrQ(receivedString) + " " + client.wordCount(receivedString);
                 System.out.println("Sendstring: " + sendString);
-                receivedString = client.sendMessage(sendString);
+                System.out.println(client.sendMessage(sendString) + "\n");
                 i++;
             }
         } catch (SocketException e) {
