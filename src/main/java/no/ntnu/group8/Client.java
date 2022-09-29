@@ -24,5 +24,21 @@ public class Client {
         clientSocket.receive(packet);
         return Arrays.toString(packet.getData());
     }
+    
+    /**
+     * Check if the text is a statement (S) or a question (Q)
+     *
+     * @param text The text to check
+     * @return The category of the text
+     */
+    public String checkSOrQ(String text) {
+        String SOrQ = "";
+        if (text.charAt(text.length()-1) == '.') {
+            SOrQ = "statement";
+        } else if (text.charAt(text.length()-1) == '?') {
+            SOrQ = "question";
+        }
+        return SOrQ;
+    }
 
 }
