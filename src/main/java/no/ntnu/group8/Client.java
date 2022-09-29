@@ -49,6 +49,8 @@ public class Client {
             SOrQ = "statement";
         } else if (text.charAt(text.length()-1) == '?') {
             SOrQ = "question";
+        } else {
+            SOrQ = "null";
         }
         return SOrQ;
     }
