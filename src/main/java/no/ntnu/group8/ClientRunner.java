@@ -16,8 +16,6 @@ public class ClientRunner {
                 receivedString = client.sendMessage(sendString);
                 i++;
             }
-    
-            System.err.println("Write a message to the server: ");
         } catch (SocketException e) {
             System.err.println("Error: Socket not created correctly");
         } catch (IOException e) {
