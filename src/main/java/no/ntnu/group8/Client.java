@@ -26,16 +26,27 @@ public class Client {
 
     public String sendMessage(String message) throws IOException {
         byte[] messageByte = message.getBytes(StandardCharsets.UTF_8);
-        DatagramPacket packet = new DatagramPacket(messageByte, messageByte.length, InetAddress.getByName(address), port);
-        System.err.println("DatagramPacket successfully created");
-        clientSocket.send(packet);
-        System.err.println("Packet successfully sent");
-        packet = new DatagramPacket(messageByte, messageByte.length);
-        clientSocket.receive(packet);
-        System.err.println("Packet successfully received");
-        System.err.println("Packet data: " + Arrays.toString(packet.getData()));
-        String returnValue = new String(packet.getData(), 0, packet.getLength());
-        return returnValue;
+        int i = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        boolean running = true;
+        while (running && i < 10) {
+            DatagramPacket packet = new DatagramPacket(messageByte, messageByte.length, InetAddress.getByName(address), port);
+            System.err.println("DatagramPacket successfully created");
+            clientSocket.send(packet);
+            System.err.println("Packet successfully sent");
+            packet = new DatagramPacket(messageByte, messageByte.length);
+            clientSocket.receive(packet);
+            System.err.println("Packet successfully received");
+            System.err.println("Packet data: " + Arrays.toString(packet.getData()));
+            String returnValue = new String(packet.getData(), 0, packet.getLength());
+            if (returnValue.equals("end")) {
+               running = false;
+            } else {
+                stringBuilder.append(returnValue);
+                i++;
+            }
+        }
+        return stringBuilder.toString();
     }
     
     /**
@@ -59,7 +70,7 @@ public class Client {
      * @param text The text to check
      * @return Number of words as an Int
      */
-    public static int wordCount(String text) {
+    public int wordCount(String text) {
         int count = 0;
         String[] splited = text.split("\\s+");
         for (int i = 0; i < splited.length; i++) {
