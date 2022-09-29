@@ -59,13 +59,13 @@ public class Client {
      * @param text The text to check
      * @return Number of words as an Int
      */
-    public int wordCount(String text){
+    public static int wordCount(String text) {
         int count = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (Character.isWhitespace(text.charAt(i))) count++;
-        }
-        if(count >= 1){
-            count++; //Add last word
+        String[] splited = text.split("\\s+");
+        for (int i = 0; i < splited.length; i++) {
+            if (splited[i].matches("[a-zA-Z]+")) {
+                count++;
+            }
         }
         return count;
     }
