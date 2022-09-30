@@ -17,7 +17,7 @@ public class ClientRunner {
                 i++;
             }
         } catch (SocketException e) {
-            System.err.println("Error: Socket not created correctly");
+            System.err.println("Error: Socket not created correctly." + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
